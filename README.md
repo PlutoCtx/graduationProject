@@ -1,82 +1,59 @@
-# WiFi 小程序 数据分析 室内定位
 
-实现步骤：
+# 基于压缩感知技术的目标跟踪实现(Implementation of Object Tracking by Compressive Sensing Technology)
 
-1. 收集某幢教学楼的WIFI信号，比如25幢一楼，电脑端跑python代码，使用`pywifi`库进行收集记录。信号数据大致为[位置（人工标记），WiFi1的强度，WiFi2的强度，...]，暂定以每块地砖的角为起始点，收集四个角的信号，每个角收集10份数据，7/3或8/2进行训练测试，用于后续的分析；
-2. 用上面收集到的信息，实现根据信号信息的定位（结果不会太准，能定位到实际的标记点本身和最近的四个点可能就到头了）
-3. 微信小程序，收集当前手机上的检测到的WiFi信号数据，主要是SSID和信号强度（其实抱着台电脑进行信号的直接捕获和位置定位更快，就是有点low）
-4. 搭一个在线服务器（网站），把小程序发送请求，当前收集到的数据信息发送到此，后端接收数据后进行分析，返回一个位置结果到小程序（手机本地跑代码的方法我目前想到的能实现的只有这个，不过由于数据传送到远程的关系，实时性会下降）
-5. 小程序接收结果，显示当前位置（比如显示“你在一楼的XX点”）
+## 01 前情了解
+**压缩感知技术**
 
+## 02 实现思路
+> 主要设计技术：
+> - Python 3.10 `pywifi`
+> - WiFi 
+> - 小程序 
+
+具体步骤：
+1. 收集某场所的WiFi数据。如25幢一楼，电脑端跑python代码，使用`pywifi`库进行收集记录，得到一楼各点的WiFi信号数据，数据的格式为[位置编号，WiFi1的强度，WiFi2的强度，...]。以每块地砖的角为起始点，收集每个地砖交接点的WiFi信号数据，每个角收集10份数据，7/3或8/2划分数据集，用于后续测试。
+2. 使用收集的数据集，分析设备当前接收到的数据信息，实现电脑端的位置定位。由于设备硬件问题，定位的准确度可以预见的不会太准。
+3. 实现信息交互微信小程序。将移动设备拓展到手机端，发送收集到的当前手机上的WiFi信号数据，主要是SSID和信号强度，至服务器。
+4. 实现数据分析压缩感知算法。通过此算法得到定位结果。
+5. 搭一个在线服务器（网站），接收小程序所发送的信息，后端接收数据后进行分析，返回一个位置结果。
+6. 小程序接收结果，显示当前位置
+
+
+-------------
 
 
 缺陷：
-
 - 实时性不足。如果改成一个本地的app或许能好一点，but还是得跑代码，肯定能做到信号的捕获，但分析得到结果这一步实现的可能性不算太高
 - 可靠性未知。单纯依靠WiFi的强度，标记点的距离如果只相隔一米的话分析的结果可能不是很准，
 - 创新性：好像没什么创新性
 
 
 
+# Implementation of Object Tracking by Compressive Sensing Technology
+## 01 Former understanding
+**Compressive Sensing Technology**
+
+## 02 Implement ideas
+Main design techniques:
+
+> Python 3.10 
+> - WiFi
+> - Mini program 
 
 
-# 人脸识别 报警
-
-功能如下：
-
-（1）支持通过摄像头捕获和存储认证用户的面部图像信息；
-
-（2）设计实现人脸识别算法，对任意两张人脸图片进行比对，判断是否为同一人;
-
-（3）支持人体关键点检测和人像精细分割；
-
-（4）安全要求1：能防御采用静态图片或视频欺骗认证；
-
-（5）安全要求2：能防御打印样本照片或特殊贴纸贴在脸上欺骗认证；
-
-（6）安全要求3：对所有恶意攻击产生告警记录，并发送短信至管理员
-
-实现步骤：
-
-1. Python/Java、Vue前端网站，实现实现人脸登录
-
-缺陷：
-
-- 创新性不足。能提的上创新的其实就一个支持活体检测
-- 实用性不足。
-- 安全性不足。虽然又小又破，但依旧存在被攻击的风险
+Specific steps:
+1. Collect WiFi data for a location. For example, on the first floor of 25 buildings, the computer runs python code, uses the pywifi library to collect and record, and obtains WiFi signal data of each point on the first floor, and the format of the data is [location number, strength of WiFi1, strength ,... of WiFi2]. Take the corner of each floor tile as the starting point, collect the WiFi signal data of each floor tile junction, collect 10 pieces of data for each corner, and divide the data set 7/3 or 8/2 for subsequent testing.
+2. Use the collected data set to analyze the data information currently received by the device to achieve the location of the computer. Due to equipment hardware problems, the accuracy of positioning can be predictably not too accurate.
+3. Realize information interaction WeChat mini program. Extend the mobile device to the mobile phone and send the collected WiFi signal data of the current mobile phone, mainly SSID and signal strength, to the server.
+4. Implement data analysis compressed sensing algorithms. The positioning result is obtained by this algorithm. 
+5. Set up an online server (website), receive the information sent by the mini program, and the backend receives the data and analyzes it and returns a location result. 
+6. The applet receives the result and displays the current location
 
 
 
-# LSTM 股票预测
-
-最近的量化投资比赛，其实还行，就是在投资平台上跑python代码实现股票的买入卖出（虚拟资金），获取盈利，省赛实际收益评分第十。
-
-![image-20231007111558349](C:/Users/chent/AppData/Roaming/Typora/typora-user-images/image-20231007111558349.png)
-
-
-
-缺陷：
-
-- 查重率可能会比较高。
-
-- 因为本专业的论文较少，偏向了经济方面
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Flaw:
+> - Lack of real-time. If you change to a local app, it may be better, but you still have to run the code, and you can definitely capture the signal, but the possibility of analyzing the results is not too high
+> - Reliability unknown. Relying solely on the strength of WiFi, the distance between the marked points may not be very accurate if they are only one meter apart. 
+> - Innovative: It doesn't seem to be innovative
 
 
