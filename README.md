@@ -42,9 +42,9 @@ Main design techniques:
 
 
 Specific steps:
-1. Collect WiFi data for a location. For example, on the first floor of 25 buildings, the computer runs python code, uses the pywifi library to collect and record, and obtains WiFi signal data of each point on the first floor, and the format of the data is [location number, strength of WiFi1, strength ,... of WiFi2]. Take the corner of each floor tile as the starting point, collect the WiFi signal data of each floor tile junction, collect 10 pieces of data for each corner, and divide the data set 7/3 or 8/2 for subsequent testing.
+1. Collect Wi-Fi data for a location. For example, on the first floor of 25 buildings, the computer runs python code, uses the pywifi library to collect and record, and obtains Wi-Fi signal data of each point on the first floor, and the format of the data is [location number, strength of WiFi1, strength ,... of WiFi2]. Take the corner of each floor tile as the starting point, collect the Wi-Fi signal data of each floor tile junction, collect 10 pieces of data for each corner, and divide the data set 7/3 or 8/2 for subsequent testing.
 2. Use the collected data set to analyze the data information currently received by the device to achieve the location of the computer. Due to equipment hardware problems, the accuracy of positioning can be predictably not too accurate.
-3. Realize information interaction WeChat mini program. Extend the mobile device to the mobile phone and send the collected WiFi signal data of the current mobile phone, mainly SSID and signal strength, to the server.
+3. Realize information interaction WeChat mini program. Extend the mobile device to the mobile phone and send the collected Wi-Fi signal data of the current mobile phone, mainly SSID and signal strength, to the server.
 4. Implement data analysis compressed sensing algorithms. The positioning result is obtained by this algorithm. 
 5. Set up an online server (website), receive the information sent by the mini program, and the backend receives the data and analyzes it and returns a location result. 
 6. The applet receives the result and displays the current location
@@ -53,7 +53,7 @@ Specific steps:
 
 Flaw:
 > - Lack of real-time. If you change to a local app, it may be better, but you still have to run the code, and you can definitely capture the signal, but the possibility of analyzing the results is not too high
-> - Reliability unknown. Relying solely on the strength of WiFi, the distance between the marked points may not be very accurate if they are only one meter apart. 
+> - Reliability unknown. Relying solely on the strength of Wi-Fi, the distance between the marked points may not be very accurate if they are only one meter apart. 
 > - Innovative: It doesn't seem to be innovative
 
 
